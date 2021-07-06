@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { AppProps } from 'next/app';
 import GlobalStyle from '../styles/global';
 import { ThemeProvider } from 'styled-components';
-import theme from '../styles/theme';
+import { light } from '../styles/theme';
 
 // interface AppContextInterface {
 //   name: string;
@@ -21,12 +21,18 @@ import theme from '../styles/theme';
 // };
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
+  const [theme, setTheme] = useState(light);
   return (
     // <AppCtx.Provider value={sampleAppContext}>
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Component {...pageProps} router={router} />
+        <Component
+          {...pageProps}
+          router={router}
+          theme={theme}
+          setTheme={setTheme}
+        />
       </ThemeProvider>
     </>
     // </AppCtx.Provider>
